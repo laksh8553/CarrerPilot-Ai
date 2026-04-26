@@ -45,13 +45,22 @@ export const useAuth = () => {
 
     useEffect(()=>{
         const getAndSetUser = async () => {
+          try {
             const data = await getMe();
-            setUser(data.user);
+            setUser(data);
+          } catch (error) {
+            if (error?.response?.status === 401) {
+              setUser(null); // User simply isn't logged in
+            } else {
+              console.error("Unexpected error:", error);
+            }
+          } finally {
             setLoading(false);
-        }
+          }
+        };
         getAndSetUser();
 
-    },{});
+    },[]);
 
     return{handleLogin, handleRegister, handleLogout, user, loading};
 }

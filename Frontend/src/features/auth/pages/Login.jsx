@@ -13,10 +13,15 @@ const Login = () => {
     const [password, setPassword] = useState('');
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        await handleLogin({email, password});
-        navigate('/');
-    }
+  e.preventDefault();
+  try {
+    await handleLogin({ email, password });
+    navigate('/');
+  } catch (err) {
+    console.error(err);
+    alert("Login failed - check backend");
+  }
+};
 
     if(loading){
         return (<main><h1>Loading.........</h1></main>);
