@@ -48,13 +48,7 @@ export const useAuth = () => {
           try {
             const data = await getMe();
             setUser(data);
-          } catch (error) {
-            if (error?.response?.status === 401) {
-              setUser(null); // User simply isn't logged in
-            } else {
-              console.error("Unexpected error:", error);
-            }
-          } finally {
+          } catch (error) {} finally {
             setLoading(false);
           }
         };
