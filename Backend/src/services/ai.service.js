@@ -86,7 +86,7 @@ Job Description: ${jobDescription}
 `;
 
     const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
+      model: "gemini-3-flash-preview",
       contents: prompt,
       config: {
         response_mime_type: "application/json",
@@ -96,7 +96,6 @@ Job Description: ${jobDescription}
 
     let text = response.text;
 
-    // 🔥 remove markdown wrappers
     text = text
       .replace(/```json/g, "")
       .replace(/```/g, "")
